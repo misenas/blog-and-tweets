@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\InvalidEntrySlugException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -44,12 +45,15 @@ class Handler extends ExceptionHandler
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response 
      *
      * @throws \Throwable
      */
     public function render($request, Throwable $exception)
-    {
+    { 
+        if ($exception instanceof InvalidEntrySlugException) {
+            return $exception->render();
+        }
         return parent::render($request, $exception);
     }
 }

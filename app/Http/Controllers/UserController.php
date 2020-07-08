@@ -13,4 +13,4 @@ class UserController extends Controller
         $entries=Entry::where('user_id',$user->id)->get();
         return view('users.show', compact('user', 'entries'));
     }
-}
+} 
